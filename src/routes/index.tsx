@@ -36,7 +36,7 @@ const navLinks = [
 const services = [
   {
     title: "Custom Pergolas",
-    description: "Bespoke pergolas designed to complement your home's architecture and your lifestyle, from intimate garden retreats to grand entertaining spaces.",
+    description: "Our line of pergolas is designed to complement your home's architecture and your lifestyle, from intimate garden retreats to grand entertaining spaces.",
   },
   {
     title: "Premium Materials",
