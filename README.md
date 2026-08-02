@@ -1,26 +1,22 @@
-# Palm Beach Pergola Design
+# Palm Beach Pergolas
 
-create a logo for Palm Beach Pergolas
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://pbpergolas.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/04472dd7-053f-42fe-a34b-1c655d09d5e0).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+Custom pergolas for luxury Palm Beach homes. Elevate your outdoor living with bespoke design, premium materials, and master craftsmanship.
 
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+You need Node.js (or Bun) installed.
 
 ```sh
 git clone <this-repository-url>
 cd <repository-name>
-npm i
-npm run dev
+bun install
+bun run dev
 ```
+
+## Scripts
+
+- `bun run dev` — Start the development server
+- `bun run build` — Build for production
+- `bun run preview` — Preview the production build
+- `bun run lint` — Lint the codebase
+- `bun run format` — Format with Prettier

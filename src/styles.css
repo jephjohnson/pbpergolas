@@ -1,5 +1,10 @@
 @import "tailwindcss" source(none);
-@source "../src";
+@source "../src/routes";
+@source "../src/lib";
+@source "../src/components/ui/button.tsx";
+@source "../src/components/ui/input.tsx";
+@source "../src/components/ui/textarea.tsx";
+@source "../src/components/ui/label.tsx";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -66,6 +71,7 @@
   --color-navy: var(--navy);
   --color-gold: var(--gold);
   --color-cream: var(--cream);
+  --color-terracotta: var(--terracotta);
 
   /* Typography */
   --font-heading: "Playfair Display", Georgia, serif;
@@ -77,9 +83,11 @@
 
   /* Coastal Luxury brand palette */
   --sand: oklch(0.96 0.02 95);
-  --navy: oklch(0.31 0.07 255);
+  /* Deep pine green — primary text/brand color (kept as --navy for class compat) */
+  --navy: oklch(0.32 0.05 165);
   --gold: oklch(0.75 0.08 75);
   --cream: oklch(0.99 0.01 95);
+  --terracotta: oklch(0.62 0.12 50);
 
   /* Semantic mapping */
   --background: var(--sand);
@@ -93,7 +101,7 @@
   --secondary: oklch(0.94 0.015 95);
   --secondary-foreground: var(--navy);
   --muted: oklch(0.92 0.01 95);
-  --muted-foreground: oklch(0.5 0.03 255);
+  --muted-foreground: oklch(0.45 0.03 165);
   --accent: var(--gold);
   --accent-foreground: var(--navy);
   --destructive: oklch(0.577 0.245 27.325);

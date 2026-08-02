@@ -11,17 +11,70 @@ import galleryModern from "@/assets/gallery-modern.jpg";
 import galleryClassic from "@/assets/gallery-classic.jpg";
 import galleryCustom from "@/assets/gallery-custom.jpg";
 import galleryPoolside from "@/assets/gallery-poolside.jpg";
-import logo from "@/assets/palm-beach-pergolas-logo.png";
+import logo from "@/assets/palm-beach-pergolas-logo-sm.png";
+
+const SITE_URL = "https://palmbeachpergolas.com";
+const TITLE = "Palm Beach Pergolas | Luxury Outdoor Living";
+const DESCRIPTION =
+  "Custom pergolas for luxury Palm Beach homes. Elevate your outdoor living with bespoke design, premium materials, and master craftsmanship.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Palm Beach Pergolas | Luxury Outdoor Living" },
-      { name: "description", content: "Custom pergolas for luxury Palm Beach homes. Elevate your outdoor living with bespoke design, premium materials, and master craftsmanship." },
-      { property: "og:title", content: "Palm Beach Pergolas | Luxury Outdoor Living" },
-      { property: "og:description", content: "Custom pergolas for luxury Palm Beach homes. Elevate your outdoor living with bespoke design, premium materials, and master craftsmanship." },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:site_name", content: "Palm Beach Pergolas" },
+      { property: "og:image", content: `${SITE_URL}/og-image.jpg` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.jpg` },
+    ],
+    links: [{ rel: "canonical", href: SITE_URL }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "Palm Beach Pergolas",
+          description: DESCRIPTION,
+          url: SITE_URL,
+          telephone: "+15615550148",
+          email: "hello@palmbeachpergolas.com",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "120 Royal Palm Way",
+            addressLocality: "Palm Beach",
+            addressRegion: "FL",
+            postalCode: "33480",
+            addressCountry: "US",
+          },
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: 26.7056,
+            longitude: -80.0364,
+          },
+          areaServed: {
+            "@type": "Place",
+            name: "Palm Beach County, Florida",
+          },
+          priceRange: "$$$",
+          openingHoursSpecification: {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            opens: "09:00",
+            closes: "17:00",
+          },
+          sameAs: [],
+        }),
+      },
     ],
   }),
   component: Index,
@@ -30,6 +83,7 @@ export const Route = createFileRoute("/")({
 const navLinks = [
   { label: "Services", href: "#services" },
   { label: "Gallery", href: "#gallery" },
+  { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -66,64 +120,9 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur">
-        <div className="container-tight flex h-20 items-center justify-between">
-          <a href="/" className="flex items-center gap-3">
-            <img src={logo} alt="Palm Beach Pergolas" className="h-12 w-auto" width={1024} height={1024} />
-            <span className="sr-only font-heading text-xl text-foreground">Palm Beach Pergolas</span>
-          </a>
-
-          <nav className="hidden items-center gap-8 md:flex">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium tracking-wide text-foreground/80 transition-colors hover:text-foreground"
-              >
-                {link.label}
-              </a>
-            ))}
-            <Button asChild size="sm">
-              <a href="#contact">Get a Quote</a>
-            </Button>
-          </nav>
-
-          <button
-            type="button"
-            className="inline-flex items-center justify-center rounded-md p-2 text-foreground md:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
-        </div>
-
-        {mobileMenuOpen && (
-          <div className="border-t border-border/50 bg-background px-4 py-4 md:hidden">
-            <nav className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-base font-medium text-foreground/80 transition-colors hover:text-foreground"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
-              <Button asChild className="w-full">
-                <a href="#contact" onClick={() => setMobileMenuOpen(false)}>
-                  Get a Quote
-                </a>
-              </Button>
-            </nav>
-          </div>
-        )}
-      </header>
-
-      {/* Hero */}
-      <section className="relative flex min-h-[85vh] items-center justify-center overflow-hidden">
+      {/* Hero with overlaid navigation */}
+      <section className="relative min-h-screen overflow-hidden">
+        {/* Full-bleed hero image */}
         <div className="absolute inset-0">
           <img
             src={heroImage}
@@ -131,29 +130,103 @@ function Index() {
             className="h-full w-full object-cover"
             width={1920}
             height={1088}
+            fetchPriority="high"
           />
-          <div className="absolute inset-0 bg-navy/55" />
         </div>
 
-        <div className="container-tight relative z-10 py-20 text-center text-white">
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-gold">Palm Beach, Florida</p>
-          <h1 className="mx-auto max-w-4xl text-balance text-4xl leading-tight font-semibold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-            Outdoor Living, Elevated
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-balance text-lg leading-relaxed text-white/90 sm:text-xl">
-            Bespoke pergolas crafted for South Florida's most discerning homeowners. Where coastal elegance meets
-            master craftsmanship.
-          </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button asChild size="lg" className="bg-gold text-navy hover:bg-gold/90">
-              <a href="#contact">
-                Request a Consultation
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-white/30 bg-white/10 text-white hover:bg-white/20 hover:text-white">
-              <a href="#gallery">View Our Work</a>
-            </Button>
+        {/* Navigation — overlays the hero image */}
+        <header className="relative z-20 w-full">
+          <div className="container-tight flex h-32 items-center justify-between">
+            <a href="/" className="flex items-center gap-3">
+              <img src={logo} alt="Palm Beach Pergolas" className="h-28 w-auto" width={320} height={320} />
+              <span className="sr-only">Palm Beach Pergolas</span>
+            </a>
+
+            <nav className="hidden items-center gap-8 md:flex">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-medium tracking-wide text-navy underline-offset-8 decoration-terracotta decoration-2 transition-all hover:text-terracotta hover:underline"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <Button asChild size="sm" className="rounded-md bg-terracotta text-white hover:bg-terracotta/90">
+                <a href="#contact">Get a Quote</a>
+              </Button>
+            </nav>
+
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-md p-2 text-navy md:hidden"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+
+          {mobileMenuOpen && (
+            <div className="bg-cream/95 px-6 py-4 backdrop-blur md:hidden">
+              <nav className="flex flex-col gap-4">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="text-base font-medium text-navy transition-colors hover:text-terracotta"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <Button asChild className="w-full rounded-md bg-terracotta text-white hover:bg-terracotta/90">
+                  <a href="#contact" onClick={() => setMobileMenuOpen(false)}>
+                    Get a Quote
+                  </a>
+                </Button>
+              </nav>
+            </div>
+          )}
+        </header>
+
+        {/* Cream panel background — translucent haze, image stays visible through it */}
+        <div
+          className="absolute inset-y-0 left-0 z-1 w-full rounded-tr-[2.5rem] md:w-[55%]"
+          style={{
+            background: "linear-gradient(to right, color-mix(in oklch, var(--cream) 90%, transparent) 0%, color-mix(in oklch, var(--cream) 75%, transparent) 45%, color-mix(in oklch, var(--cream) 40%, transparent) 75%, transparent 100%)",
+          }}
+        />
+
+        {/* Hero content — vertically centered over the panel */}
+        <div className="relative z-10 flex min-h-screen items-center">
+          <div className="w-full py-12 pl-6 pr-10 sm:pl-8 md:w-[48%] md:py-16 md:pl-12 lg:py-20 lg:pl-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]">
+            <div className="max-w-lg">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-terracotta">
+                Palm Beach &middot; South Florida
+              </p>
+              <h1 className="mt-5 text-5xl leading-[1.05] font-bold tracking-tight text-navy sm:text-6xl lg:text-7xl">
+                Shade,
+                <br />
+                Elevated.
+              </h1>
+              <div className="mt-6 h-0.5 w-12 bg-terracotta" />
+              <p className="mt-6 max-w-md text-base leading-relaxed text-navy/85">
+                Custom pergolas designed to bring structure, comfort, and timeless coastal style to your
+                outdoor space—crafted for the way you live in South Florida.
+              </p>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Button asChild size="lg" className="rounded-md bg-terracotta text-white hover:bg-terracotta/90">
+                  <a href="#contact">
+                    Start Your Project
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="rounded-md border-navy text-navy transition-colors hover:bg-navy hover:text-cream">
+                  <a href="#gallery">Explore Our Work</a>
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -162,7 +235,7 @@ function Index() {
       <section id="services" className="section-padding bg-background">
         <div className="container-tight">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-gold">What We Do</p>
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-terracotta">What We Do</p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Designed for the Coast</h2>
             <p className="mt-4 text-muted-foreground">
               Every pergola we build is a custom statement—engineered for the elements and tailored to your home.
@@ -191,7 +264,7 @@ function Index() {
         <div className="container-tight">
           <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
             <div className="max-w-2xl">
-              <p className="text-sm font-medium uppercase tracking-[0.2em] text-gold">Portfolio</p>
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-terracotta">Portfolio</p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Spaces We've Transformed</h2>
               <p className="mt-4 text-muted-foreground">
                 A curated selection of pergolas built for luxury homes across Palm Beach County.
@@ -208,11 +281,12 @@ function Index() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {gallery.map((item) => (
               <div key={item.title} className="group overflow-hidden rounded-xl bg-card">
-                <div className="aspect-[4/3] overflow-hidden">
+                <div className="aspect-4/3 overflow-hidden">
                   <img
                     src={item.src}
                     alt={item.alt}
                     loading="lazy"
+                    decoding="async"
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     width={1024}
                     height={768}
@@ -232,7 +306,7 @@ function Index() {
         <div className="container-tight">
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
-              <p className="text-sm font-medium uppercase tracking-[0.2em] text-gold">Get in Touch</p>
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-terracotta">Get in Touch</p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Begin Your Outdoor Transformation</h2>
               <p className="mt-4 text-muted-foreground">
                 Tell us about your vision. We'll respond within one business day to schedule a private consultation.
@@ -245,7 +319,7 @@ function Index() {
                   </div>
                   <div>
                     <p className="font-medium">Phone</p>
-                    <p className="text-muted-foreground">(561) 555-0148</p>
+                    <a href="tel:+15615550148" className="text-muted-foreground transition-colors hover:text-terracotta">(561) 555-0148</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -254,7 +328,7 @@ function Index() {
                   </div>
                   <div>
                     <p className="font-medium">Email</p>
-                    <p className="text-muted-foreground">hello@palmbeachpergolas.com</p>
+                    <a href="mailto:hello@palmbeachpergolas.com" className="text-muted-foreground transition-colors hover:text-terracotta">hello@palmbeachpergolas.com</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -309,7 +383,7 @@ function Index() {
                       required
                     />
                   </div>
-                  <Button type="submit" className="w-full bg-gold text-navy hover:bg-gold/90">
+                  <Button type="submit" className="w-full bg-terracotta text-white hover:bg-terracotta/90">
                     Send Inquiry
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -325,7 +399,7 @@ function Index() {
         <div className="container-tight">
           <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
             <div className="flex items-center gap-3">
-              <img src={logo} alt="Palm Beach Pergolas" className="h-10 w-auto" width={1024} height={1024} />
+              <img src={logo} alt="Palm Beach Pergolas" className="h-12 w-auto" width={320} height={320} loading="lazy" decoding="async" />
               <span className="font-heading text-lg">Palm Beach Pergolas</span>
             </div>
             <p className="text-sm text-white/60">© {new Date().getFullYear()} Palm Beach Pergolas. All rights reserved.</p>
