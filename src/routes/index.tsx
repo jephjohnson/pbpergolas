@@ -47,7 +47,7 @@ export const Route = createFileRoute("/")({
           description: DESCRIPTION,
           url: SITE_URL,
           telephone: "+15615550148",
-          email: "hello@palmbeachpergolas.com",
+          email: "rob@pbpergolas.com",
           address: {
             "@type": "PostalAddress",
             streetAddress: "120 Royal Palm Way",
@@ -328,7 +328,7 @@ function Index() {
                   </div>
                   <div>
                     <p className="font-medium">Email</p>
-                    <a href="mailto:hello@palmbeachpergolas.com" className="text-muted-foreground transition-colors hover:text-terracotta">hello@palmbeachpergolas.com</a>
+                    <a href="mailto:rob@pbpergolas.com" className="text-muted-foreground transition-colors hover:text-terracotta">rob@pbpergolas.com</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -372,7 +372,7 @@ function Index() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone</Label>
-                    <Input id="phone" type="tel" placeholder="(561) 555-0148" />
+                    <Input id="phone" type="tel" placeholder="(561) 628-5108" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="message">Tell us about your project</Label>
